@@ -1,38 +1,35 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Note from "./components/Note";
-import AppBar from "./components/AppBar";
-import Formulario from "./components/Formulario";
-import "./App.css";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  const [notes, setNotes] = useState([]);
-
-  const carregaNotas = () => {
-    axios
-      .get("http://localhost:8000/api/notes/")
-      .then((res) => setNotes(res.data));
-  }
-
-  useEffect(() => {
-    carregaNotas();
-  }, []);
+  const [count, setCount] = useState(0)
 
   return (
     <>
-      <AppBar />
-      <main className="container">
-        <Formulario loadNotes={carregaNotas}/>
-        <div className="card-container">
-          {notes.map((note) => (
-            <Note key={`note__${note.id}`} title={note.title}>
-              {note.content}
-            </Note>
-          ))}
-        </div>
-      </main>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
